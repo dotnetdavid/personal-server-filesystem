@@ -1,0 +1,13 @@
+services:
+  personal-vault-filesystem:
+    build:
+      context: .
+    image: personal-vault-filesystem:latest
+    container_name: mcp-personal-vault-filesystem
+    command: ["/app/node_modules/.bin/mcp-server-filesystem", "/personal"]
+    env_file:
+      - ./env/env.compose
+    volumes:
+      - "${VAULT_ROOT}:/personal:rw"
+    stdin_open: true
+    tty: true

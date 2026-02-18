@@ -1,0 +1,19 @@
+# Environment configuration (actual configs, not examples)
+env/env.mk
+env/env.sh
+env/env.compose
+treedir.txt
+exclude/
+exclude/*
+
+# Docker
+*.log
+docker-compose.override.yaml
+
+# Build artifacts
+*.pyc
+__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
