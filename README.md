@@ -217,7 +217,7 @@ The MCP filesystem server supports operations that modify files, including:
 - creating new notes
 - updating existing notes
 - renaming files
-- (deleting files is not included)
+- **WARNING:** File deletion is active!
 
 For this reason, the vault must be mounted read/write.  
 If you only need read-only access (e.g., search, summarization), you may change the mount to `:ro`, but write operations will fail.
