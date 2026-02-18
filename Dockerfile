@@ -1,4 +1,4 @@
-# Dockerfile — personal-vault-filesystem
+# Dockerfile — personal-server-filesystem
 
 FROM node:20-slim
 

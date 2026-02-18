@@ -1,6 +1,6 @@
-# mcp-personal-vault-filesystem.toml
+# mcp-personal-server-filesystem.toml
 
-name = "personal-vault-filesystem"
+name = "personal-server-filesystem"
 version = "1.0.0"
 description = "Filesystem MCP server for the Personal vault."
 
@@ -10,7 +10,7 @@ command = [
     "docker",
     "exec",
     "-i",
-    "mcp-personal-vault-filesystem",
+    "mcp-personal-server-filesystem",
     "mcp-server-filesystem",
     "/personal"
 ]

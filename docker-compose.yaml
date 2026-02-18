@@ -1,9 +1,9 @@
 services:
-  personal-vault-filesystem:
+  personal-server-filesystem:
     build:
       context: .
-    image: personal-vault-filesystem:latest
-    container_name: mcp-personal-vault-filesystem
+    image: personal-server-filesystem:latest
+    container_name: mcp-personal-server-filesystem
     command: ["/app/node_modules/.bin/mcp-server-filesystem", "/personal"]
     env_file:
       - ./env/env.compose

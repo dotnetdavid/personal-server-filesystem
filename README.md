@@ -1,4 +1,4 @@
-# Obsidian personal-vault-filesystem MCP Server
+# Obsidian personal-server-filesystem MCP Server
 
 A minimal, isolated, Dockerized Model Context Protocol (MCP) filesystem server that exposes a single Obsidian vault (`/personal`) to MCP‑compatible clients such as LM Studio and JetBrains IDEs. This project serves as a clean, professional reference implementation for building vault‑scoped filesystem servers using the official `@modelcontextprotocol/server-filesystem` package.
 
@@ -29,7 +29,7 @@ The design emphasizes determinism, portability, and strict Obsidian vault isolat
                 | MCP over stdio
                 v
 +-----------------------------------------------+
-|  Docker Container: personal-vault-filesystem  |
+|  Docker Container: personal-server-filesystem  |
 |-----------------------------------------------|
 |  Node 20-slim                                 |
 |  @modelcontextprotocol/server-filesystem      |
@@ -49,11 +49,11 @@ The container runs the MCP filesystem server with `/personal` as its root. All f
 ## Directory Structure
 
 ```
-personal-vault-filesystem/
+personal-server-filesystem/
 ├── Dockerfile
 ├── docker-compose.yaml
 ├── Makefile
-├── mcp-personal-vault-filesystem.toml
+├── mcp-personal-server-filesystem.toml
 ├── README.md
 ├── env/
 │   ├── env.compose
@@ -118,11 +118,11 @@ This removes all containers, images, and dangling artifacts associated with the 
 
 ```yaml
 services:
-  personal-vault-filesystem:
+  personal-server-filesystem:
     build:
       context: .
-    image: personal-vault-filesystem:latest
-    container_name: mcp-personal-vault-filesystem
+    image: personal-server-filesystem:latest
+    container_name: mcp-personal-server-filesystem
     command: ["/app/node_modules/.bin/mcp-server-filesystem", "/personal"]
     env_file:
       - ./env/env.compose
@@ -160,7 +160,7 @@ CMD ["mcp-server-filesystem", "/personal"]
 
 ## MCP Client Configuration (TOML)
 ```
-name = "personal-vault-filesystem"
+name = "personal-server-filesystem"
 version = "1.0.0"
 description = "Filesystem MCP server for the Personal vault."
 
@@ -169,7 +169,7 @@ command = [
     "docker",
     "exec",
     "-i",
-    "mcp-personal-vault-filesystem",
+    "mcp-personal-server-filesystem",
     "mcp-server-filesystem",
     "/personal"
 ]
@@ -195,7 +195,7 @@ export PYTHON="/z/path-to/Python/Python313/python"
 export DOCKER="docker"
 export TERRAFORM="/z/path-to/chocolatey/bin/terraform"
 
-export PROJECT_ROOT="/z/path-to/personal-vault-filesystem"
+export PROJECT_ROOT="/z/path-to/personal-server-filesystem"
 export VAULT_ROOT="/z/path-to-target-vault/vault"
 
 export CONTAINER_MOUNT="$VAULT_ROOT:/personal"
@@ -227,7 +227,7 @@ If you only need read-only access (e.g., search, summarization), you may change 
 This project was created using MSYS2‑style POSIX paths inside environment files and scripts:
 ```
 /z/your-vault-path/Personal
-/d/path-to-git-project/personal-vault-filesystem
+/d/path-to-git-project/personal-server-filesystem
 ```
 
 
@@ -285,7 +285,7 @@ See the `LICENSE` file for the full text.
 
 ## Roadmap
 
-- Publish Docker image to Docker Hub (`personal-vault-filesystem`)
+- Publish Docker image to Docker Hub (`personal-server-filesystem`)
 - Add automated MCP test suite
 - Provide boilerplate templates for:
   - Work vault

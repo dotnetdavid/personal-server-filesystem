@@ -16,7 +16,7 @@ fi
 
 # Stop all containers built from this image (prefer compose if present)
 "$DOCKER" compose down 2>/dev/null || true
-CONTAINERS=$("$DOCKER" ps -q --filter "ancestor=personal-vault-filesystem" 2>/dev/null)
+CONTAINERS=$("$DOCKER" ps -q --filter "ancestor=personal-server-filesystem" 2>/dev/null)
 if [[ -n "$CONTAINERS" ]]; then
     echo "$CONTAINERS" | xargs "$DOCKER" stop 2>/dev/null || true
 fi

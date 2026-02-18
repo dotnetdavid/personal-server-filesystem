@@ -18,4 +18,4 @@ if ! command -v "$DOCKER" &> /dev/null; then
     exit 1
 fi
 
-"$DOCKER" build -t personal-vault-filesystem "$PROJECT_ROOT"
+"$DOCKER" build -t personal-server-filesystem "$PROJECT_ROOT"

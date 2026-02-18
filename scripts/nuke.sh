@@ -34,11 +34,11 @@ if [[ "${CONFIRM:-}" != "1" ]]; then
     fi
 fi
 
-echo "=== NUCLEAR RESET: personal-vault-filesystem ==="
+echo "=== NUCLEAR RESET: personal-server-filesystem ==="
 
 echo "Stopping project containers..."
 "$DOCKER" compose down 2>/dev/null || true
-CONTAINERS=$("$DOCKER" ps -q --filter "ancestor=personal-vault-filesystem" 2>/dev/null)
+CONTAINERS=$("$DOCKER" ps -q --filter "ancestor=personal-server-filesystem" 2>/dev/null)
 if [[ -n "$CONTAINERS" ]]; then
     echo "$CONTAINERS" | xargs "$DOCKER" stop 2>/dev/null || true
 fi
@@ -47,6 +47,6 @@ echo "Pruning Docker system..."
 "$DOCKER" system prune -f
 
 echo "Rebuilding image..."
-"$DOCKER" build -t personal-vault-filesystem "$PROJECT_ROOT" --no-cache
+"$DOCKER" build -t personal-server-filesystem "$PROJECT_ROOT" --no-cache
 
 echo "=== NUCLEAR RESET COMPLETE ==="

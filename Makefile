@@ -1,4 +1,4 @@
-# Makefile — personal-vault-filesystem
+# Makefile — personal-server-filesystem
 
 # Load machine-specific configuration
 include env/env.mk
@@ -11,7 +11,7 @@ include env/env.mk
 # ---------------------------------------------------------------------------
 help:
 	@echo ""
-	@echo "personal-vault-filesystem — Make Targets"
+	@echo "personal-server-filesystem — Make Targets"
 	@echo ""
 	@echo "  make build      Build the Docker image"
 	@echo "  make run        Run the container (foreground)"

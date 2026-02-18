@@ -14,4 +14,4 @@ if ! command -v "$DOCKER" &> /dev/null; then
     exit 1
 fi
 
-"$DOCKER" compose logs -f personal-vault-filesystem
+"$DOCKER" compose logs -f personal-server-filesystem

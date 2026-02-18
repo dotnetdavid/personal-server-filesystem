@@ -1,11 +1,11 @@
 {
   "mcpServers": {
-    "personal-vault-filesystem": {
+    "personal-server-filesystem": {
       "command": "node",
       "args": [
-        "D:/devel/mcp-impls/personal-vault-filesystem/node_modules/@modelcontextprotocol/server-filesystem/dist/index.js",
+        "D:/devel/mcp-impls/personal-server-filesystem/node_modules/@modelcontextprotocol/server-filesystem/dist/index.js",
         "--config",
-        "D:/devel/mcp-impls/personal-vault-filesystem/mcp-personal-vault-filesystem.toml"
+        "D:/devel/mcp-impls/personal-server-filesystem/mcp-personal-server-filesystem.toml"
       ]
     }
   }

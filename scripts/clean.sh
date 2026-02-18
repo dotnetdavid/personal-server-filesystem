@@ -25,7 +25,7 @@ if [[ "${CONFIRM:-}" != "1" ]]; then
     fi
 fi
 
-echo "Cleaning Docker artifacts for personal-vault-filesystem..."
+echo "Cleaning Docker artifacts for personal-server-filesystem..."
 
 # Remove dangling containers (exited, unnamed)
 "$DOCKER" container prune -f
@@ -37,7 +37,7 @@ echo "Cleaning Docker artifacts for personal-vault-filesystem..."
 "$DOCKER" network prune -f
 
 # Remove project image(s) if present
-IMAGES=$("$DOCKER" images -q "personal-vault-filesystem*" 2>/dev/null)
+IMAGES=$("$DOCKER" images -q "personal-server-filesystem*" 2>/dev/null)
 if [[ -n "$IMAGES" ]]; then
     echo "$IMAGES" | xargs "$DOCKER" rmi -f 2>/dev/null || true
 fi
