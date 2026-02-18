@@ -2,11 +2,11 @@
   "mcpServers": {
     "personal-server-filesystem": {
       "command": "node",
-      "args": [
+      "args": ["dist/index.js"],
       "cwd": ".",
-        "--config",
-        "D:/devel/mcp-impls/personal-server-filesystem/mcp-personal-server-filesystem.toml"
-      ]
+      "env": {
+        "NODE_ENV": "development"
+      }
     }
   }
 }
