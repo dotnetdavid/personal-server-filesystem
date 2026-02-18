@@ -3,7 +3,7 @@
     "personal-server-filesystem": {
       "command": "node",
       "args": [
-        "D:/devel/mcp-impls/personal-server-filesystem/node_modules/@modelcontextprotocol/server-filesystem/dist/index.js",
+      "cwd": ".",
         "--config",
         "D:/devel/mcp-impls/personal-server-filesystem/mcp-personal-server-filesystem.toml"
       ]
