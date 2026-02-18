@@ -4,6 +4,10 @@ FROM node:20-slim
 
 WORKDIR /app
 
+# Install procps so HEALTHCHECK can use pgrep (node:20-slim does not include it)
+RUN apt-get update && apt-get install -y --no-install-recommends procps \
+  && rm -rf /var/lib/apt/lists/*
+
 # Install the official MCP filesystem server (pinned version for reproducibility)
 RUN npm install --omit=dev @modelcontextprotocol/server-filesystem@2026.1.14
 
