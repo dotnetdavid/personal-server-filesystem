@@ -217,7 +217,7 @@ The MCP filesystem server supports operations that modify files, including:
 - creating new notes
 - updating existing notes
 - renaming files
-- **WARNING:** File deletion is active!
+- there is no delete function - use move_file to move target files to a trash folder
 
 For this reason, the vault must be mounted read/write.  
 If you only need read-only access (e.g., search, summarization), you may change the mount to `:ro`, but write operations will fail.
@@ -227,7 +227,7 @@ If you only need read-only access (e.g., search, summarization), you may change 
 This project was created using MSYS2‑style POSIX paths inside environment files and scripts:
 ```
 /z/your-vault-path/Personal
-/d/path-to-git-project/personal-server-filesystem
+/z/path-to-git-project/personal-server-filesystem
 ```
 
 
@@ -248,9 +248,6 @@ You may set VAULT_ROOT in env/env.sh or env/env.mk using either format:
 - env/env.sh is sourced by Bash scripts → POSIX paths recommended
 - env/env.mk is used by Make → POSIX paths recommended
 - docker-compose.yaml receives the value unchanged → both formats work
-
-
----
 
 
 ---
