@@ -1,5 +1,0 @@
-steps:
-  - label: "Run Tests"
-    commands:
-      - "npm ci"
-      - "npm test"
