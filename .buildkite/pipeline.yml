@@ -8,4 +8,4 @@ steps:
       - node --version || true
       - echo "Build complete."
     agents:
-      queue: "windows"
+      queue: "default-self-hosted"
