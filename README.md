@@ -39,7 +39,7 @@ The design emphasizes determinism, portability, and strict Obsidian vault isolat
                        |
                        | Bind Mount (rw)
                        v
-        D:\ai-projects\Telos\Personal
+        Z:\path-to-your-vault\Personal
 ```
 
 The container runs the MCP filesystem server with `/personal` as its root. All filesystem operations are restricted to this directory.
@@ -191,13 +191,9 @@ This ensures:
 
 Example (`env/env.sh`):
 ```
-export PYTHON="/z/path-to/Python/Python313/python"
 export DOCKER="docker"
-export TERRAFORM="/z/path-to/chocolatey/bin/terraform"
-
 export PROJECT_ROOT="/z/path-to/personal-server-filesystem"
 export VAULT_ROOT="/z/path-to-target-vault/vault"
-
 export CONTAINER_MOUNT="$VAULT_ROOT:/personal"
 ```
 
