@@ -1,0 +1,20 @@
+# mcp-personal-server-filesystem.toml
+
+name = "personal-server-filesystem"
+version = "1.0.0"
+description = "Filesystem MCP server for the Personal vault."
+
+[server]
+# LM Studio will exec into the running container
+command = [
+    "docker",
+    "exec",
+    "-i",
+    "mcp-personal-server-filesystem",
+    "mcp-server-filesystem",
+    "/personal"
+]
+
+# Optional: environment variables passed to the server
+[env]
+VAULT_ROOT = "/personal"
