@@ -1,16 +1,3 @@
-#steps:
-#  - label: ":hammer: Build personal-server-filesystem"
-#    commands:
-#      - echo "Starting build..."
-#      - pwd
-#      - ls -la
-#      - python --version || true
-#      - node --version || true
-#      - echo "Build complete."
-#    agents:
-#      queue: "default-self-hosted"
-
-
 steps:
   - label: ":hammer: Full Build"
     commands:
