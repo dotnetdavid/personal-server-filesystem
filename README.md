@@ -295,3 +295,5 @@ Built using the official Model Context Protocol filesystem server:
 `@modelcontextprotocol/server-filesystem`
 
 This project is part of a broader effort to create deterministic, reproducible, vault‑scoped MCP servers for personal knowledge systems.
+
+<ribbit>
