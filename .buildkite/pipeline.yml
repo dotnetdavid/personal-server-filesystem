@@ -19,9 +19,9 @@ steps:
       - echo "Stopping containers..."
       - make stop
       - echo "Cleaning Docker images..."
-      - make clean --yes
+      - make clean-force
       - echo "Nuking Docker images..."
-      - make nuke --yes
+      - make nuke-force
       - echo "Rebuilding and starting containers..."
       - make daemon
       - echo "Containers status:"
