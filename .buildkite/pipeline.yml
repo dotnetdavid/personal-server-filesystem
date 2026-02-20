@@ -15,7 +15,7 @@ steps:
   - label: ":hammer: Full Build"
     commands:
       - mkdir -p env
-      - cp -R /home/devel/ai-projects/personal-server-filesystem/env/* env/
+      - cp -R /home/dfrey/devel/ai-projects/personal-server-filesystem/env/* env/
       - echo "Stopping containers..."
       - make stop
       - echo "Cleaning Docker images..."
