@@ -21,20 +21,20 @@ help:
 	@echo "  make status     Show container and image status"
 	@echo "  make clean      Remove dangling Docker artifacts"
 	@echo "  make nuke       Full teardown and rebuild"
-	@echo "  make sync-env   Sync path variables for docker-compose"
+	@echo "  make init       initialize the project"
 	@echo "  make help       Show this help menu"
 	@echo ""
 
 # ---------------------------------------------------------------------------
 # Build
 # ---------------------------------------------------------------------------
-build: sync-env
+build: init
 	@./scripts/build.sh
 
 # ---------------------------------------------------------------------------
 # Run
 # ---------------------------------------------------------------------------
-run: sync-env
+run: init
 	@./scripts/run.sh
 
 # ---------------------------------------------------------------------------
@@ -64,20 +64,21 @@ clean:
 # ---------------------------------------------------------------------------
 # Nuke - Rebuild from scorched earth
 # ---------------------------------------------------------------------------
-nuke: sync-env
+nuke: init
 	@./scripts/nuke.sh
 
 # ---------------------------------------------------------------------------
 # daemon
 # ---------------------------------------------------------------------------
-daemon: sync-env
+daemon: init
 	@./scripts/daemon.sh
 
 # ---------------------------------------------------------------------------
-# sync-env
+# init
 # ---------------------------------------------------------------------------
-.PHONY: sync-env
-sync-env:
+.PHONY: init
+init:
 	@echo "Generating env/env.compose from env/env.sh..."
 	@awk '/^export VAULT_ROOT=/{gsub("export ", "", $$0); print $$0}' env/env.sh > env/env.compose
+	@chmod +x scripts/*
 	@echo "env/env.compose updated."

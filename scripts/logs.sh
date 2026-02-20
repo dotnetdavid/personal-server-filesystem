@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 set -euo pipefail
 
 ENV_FILE="$(dirname "$0")/../env/env.sh"
