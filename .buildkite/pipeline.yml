@@ -12,10 +12,40 @@
 
 
 steps:
-  - label: ":docker: Full Rebuild"
+  - label: ":hammer: Full Build"
     commands:
+      - |
+        cat > env/env.sh <<EOF
+        export PYTHON="${PYTHON}"
+        export DOCKER="${DOCKER}"
+        export TERRAFORM="${TERRAFORM}"
+        export PROJECT_ROOT="${PROJECT_ROOT}"
+        export VAULT_ROOT="${VAULT_ROOT}"
+        export CONTAINER_MOUNT="${VAULT_ROOT}/personal"
+        EOF
+
+      - |
+        cat > env/env.mk <<EOF
+        PYTHON := ${PYTHON}
+        DOCKER := ${DOCKER}
+        TERRAFORM := ${TERRAFORM}
+        PROJECT_ROOT := ${PROJECT_ROOT}
+        VAULT_ROOT := ${VAULT_ROOT}
+        CONTAINER_MOUNT := \${VAULT_ROOT}/personal
+        EOF
+
+      - |
+        cat > env/env.compose <<EOF
+        PYTHON=${PYTHON}
+        DOCKER=${DOCKER}
+        TERRAFORM=${TERRAFORM}
+        PROJECT_ROOT=${PROJECT_ROOT}
+        VAULT_ROOT=${VAULT_ROOT}
+        CONTAINER_MOUNT=${VAULT_ROOT}/personal
+        EOF
+
       - make stop
-      - make nuke --yes
+      - make nuke
       - make daemon
       - make status
     agents:
