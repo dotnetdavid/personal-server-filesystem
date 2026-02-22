@@ -29,6 +29,8 @@ steps:
     key: "test"
     depends_on: "build"
     commands:
+      - mkdir -p env
+      - cp -R /home/dfrey/devel/ai-projects/personal-server-filesystem/env/* env/
       - |
         echo "Running infrastructure tests..."
         if ! make test-infra; then
@@ -60,6 +62,8 @@ steps:
     key: "promote"
     depends_on: "test"
     commands:
+      - mkdir -p env
+      - cp -R /home/dfrey/devel/ai-projects/personal-server-filesystem/env/* env/
       - |
         echo "Promoting test image to production..."
         if ! make promote; then
