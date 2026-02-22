@@ -5,6 +5,8 @@ steps:
   - label: ":construction: Build Test Environment"
     key: "build"
     commands:
+      - mkdir -p env
+      - cp -R /home/dfrey/devel/ai-projects/personal-server-filesystem/env/* env/
       - |
         echo "Starting test environment build..."
         if ! make test-standup; then
