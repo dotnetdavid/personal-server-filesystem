@@ -61,7 +61,7 @@ steps:
   - label: ":rocket: Promote and Teardown"
     key: "promote"
     depends_on: "test"
-    branch: "master"
+    branches: ["main", "master"]
     commands:
       - mkdir -p env
       - cp -R /home/dfrey/devel/ai-projects/personal-server-filesystem/env/* env/
