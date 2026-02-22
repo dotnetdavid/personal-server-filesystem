@@ -1,11 +1,13 @@
 # Dockerfile — personal-server-filesystem
 
-FROM node:20-slim
+FROM node:22-slim
 
 WORKDIR /app
 
 # Install procps so HEALTHCHECK can use pgrep (node:20-slim does not include it)
-RUN apt-get update && apt-get install -y --no-install-recommends procps \
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y --no-install-recommends procps \
   && rm -rf /var/lib/apt/lists/*
 
 # Install the official MCP filesystem server (pinned version for reproducibility)

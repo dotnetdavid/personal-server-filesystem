@@ -1,0 +1,36 @@
+# Dockerfile.test-harness
+#
+# This container runs the test suite against the Test Container.
+# It contains Node, Vitest, and your test code.
+# Default entrypoint is bash for debugging and human-in-the-loop workflows.
+
+FROM node:22-slim
+
+WORKDIR /app
+
+# Update the OS/patch for vulnerabilities
+RUN apt-get update && apt-get upgrade -y
+
+# Install test dependencies
+
+# Install infra-level test tools
+RUN apt-get install -y \
+    iputils-ping \
+    curl \
+    netcat-openbsd \
+    docker.io \
+  && rm -rf /var/lib/apt/lists/*
+
+COPY test-harness/package.json package-lock.json* ./
+RUN npm install --omit=dev \
+    && npm install --save-dev vitest
+
+# Copy the test suite
+COPY scripts/run-infra-tests.sh /app/run-infra-tests.sh
+COPY test-harness/tests ./tests
+
+# Add any MCP client utilities (later)
+# COPY scripts/mcp-client.js /app/scripts/
+
+# Default entrypoint is bash for flexibility
+ENTRYPOINT ["/bin/bash"]

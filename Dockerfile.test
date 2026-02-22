@@ -1,0 +1,14 @@
+# Dockerfile.test
+# Test-only wrapper around the base image.
+# Adds a TCP proxy that exposes the stdio MCP server over TCP.
+
+FROM personal-server-filesystem:base
+
+# Copy the TCP proxy script into the container
+COPY scripts/tcp-proxy.js /app/tcp-proxy.js
+
+# Expose port externally
+EXPOSE 3000
+
+# Use Node to run the TCP proxy
+ENTRYPOINT ["node", "/app/tcp-proxy.js"]
