@@ -231,7 +231,18 @@ promote: init
 	@$(call with_env, \
 	  echo "Tagging test image as production..."; \
 	  "$$DOCKER" tag "$(TEST_IMAGE_TEST)" "$(PROJECT_NAME):prod"; \
-	  echo "Pushing production image..."; \
-	  "$$DOCKER" push "$(PROJECT_NAME):prod"; \
-	  echo "Promotion complete."; \
+	  echo "Skipping push (disabled)..."; \
+	  # "$$DOCKER" push "$(PROJECT_NAME):prod"; \
+	  echo "Promotion complete (local only)."; \
 	)
+
+prod-run: init
+	@$(call with_env, \
+	  echo "Starting production container..."; \
+	  "$$DOCKER" rm -f "mcp-personal-server-filesystem" >/dev/null 2>&1 || true; \
+	  "$$DOCKER" run --rm -d \
+	    --name "mcp-personal-server-filesystem" \
+	    "$(PROJECT_NAME):prod"; \
+	  echo "Production container is running."; \
+	)
+

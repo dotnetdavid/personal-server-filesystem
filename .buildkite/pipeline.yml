@@ -75,6 +75,16 @@ steps:
         fi
 
       - |
+        echo "Running the production image..."
+        if ! make prod-run; then
+          echo "❌ ERROR: prod-run failed."
+          echo "    - Check Docker daemon logs on the agent"
+          exit 1
+        fi
+
+        
+
+      - |
         echo "Tearing down test environment..."
         if ! make test-teardown; then
           echo "❌ ERROR: Test teardown failed."

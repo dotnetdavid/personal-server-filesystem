@@ -14,5 +14,5 @@ if ! command -v "$DOCKER" &> /dev/null; then
     exit 1
 fi
 
-"$DOCKER" ps
-"$DOCKER" images
+"$DOCKER" ps -a
+"$DOCKER" images -a
