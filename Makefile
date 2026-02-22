@@ -183,7 +183,7 @@ build-harness: init
 	  "$$DOCKER" build --no-cache -t "$(TEST_IMAGE_HARNESS)" -f Dockerfile.test-harness . \
 	)
 
-test-infra: init test-network build-harness
+test-infra: init
 	@$(call with_env, \
 	  "$$DOCKER" run --rm \
 	    --network "$(TEST_NETWORK)" \
