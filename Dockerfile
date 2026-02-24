@@ -1,6 +1,6 @@
 # Dockerfile — personal-server-filesystem
 
-FROM node:20-slim
+FROM node:22-trixie-slim
 
 WORKDIR /app
 
@@ -13,9 +13,6 @@ RUN npm install --omit=dev @modelcontextprotocol/server-filesystem@2026.1.14
 
 # Ensure local node_modules/.bin is on PATH
 ENV PATH="/app/node_modules/.bin:${PATH}"
-
-# Vault root inside the container
-ENV VAULT_ROOT=/personal
 
 # Healthcheck to ensure the MCP server is running
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
