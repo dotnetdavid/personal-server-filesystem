@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 set -euo pipefail
 
 ENV_FILE="$(dirname "$0")/../env/env.sh"
@@ -14,5 +14,5 @@ if ! command -v "$DOCKER" &> /dev/null; then
     exit 1
 fi
 
-"$DOCKER" ps
-"$DOCKER" images
+"$DOCKER" ps -a
+"$DOCKER" images -a

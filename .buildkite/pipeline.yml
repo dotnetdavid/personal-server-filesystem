@@ -1,11 +1,108 @@
 steps:
-  - label: ":hammer: Build personal-server-filesystem"
+  # ---------------------------------------------------------------------------
+  # 1. BUILD PHASE
+  # ---------------------------------------------------------------------------
+  - label: ":construction: Build Test Environment"
+    key: "build"
     commands:
-      - echo "Starting build..."
-      - pwd
-      - ls -la
-      - python --version || true
-      - node --version || true
-      - echo "Build complete."
+      - mkdir -p env
+      - cp -R /home/dfrey/devel/ai-projects/personal-server-filesystem/env/* env/
+      - |
+        echo "Starting test environment build..."
+        if ! make test-standup; then
+          echo "❌ ERROR: Test environment build failed."
+          echo "    - Check Dockerfile, Dockerfile.test, and Dockerfile.test-harness"
+          echo "    - Check network creation via test-network"
+          echo "    - Check container startup logs for the test container"
+          echo "    - Check Makefile targets: test-network, build-base, build-test, build-harness"
+          exit 1
+        fi
+
+      - echo "✅ Test environment build completed successfully."
+    agents:
+      queue: "default-self-hosted"
+
+  # ---------------------------------------------------------------------------
+  # 2. TEST PHASE
+  # ---------------------------------------------------------------------------
+  - label: ":microscope: Run Tests"
+    key: "test"
+    depends_on: "build"
+    commands:
+      - mkdir -p env
+      - cp -R /home/dfrey/devel/ai-projects/personal-server-filesystem/env/* env/
+      - |
+        echo "Running infrastructure tests..."
+        if ! make test-infra; then
+          echo "❌ ERROR: Infrastructure tests failed."
+          echo "    - Check harness container logs"
+          echo "    - Check /app/run-infra-tests.sh output"
+          echo "    - Check Docker network and container connectivity"
+          exit 1
+        fi
+
+      - |
+        echo "Running log tests..."
+        if ! make test-logs; then
+          echo "❌ ERROR: Log tests failed."
+          echo "    - Check scripts/test-mcp-logs.sh output"
+          echo "    - Check container startup logs"
+          echo "    - Check for missing or malformed log entries"
+          exit 1
+        fi
+
+      - echo "✅ All tests passed."
+    agents:
+      queue: "default-self-hosted"
+
+  # ---------------------------------------------------------------------------
+  # 3. PROMOTION + TEARDOWN PHASE
+  # ---------------------------------------------------------------------------
+  - label: ":rocket: Promote and Teardown"
+    key: "promote"
+    depends_on: "test"
+    branches: ["main", "master"]
+    commands:
+      - mkdir -p env
+      - cp -R /home/dfrey/devel/ai-projects/personal-server-filesystem/env/* env/
+      - |
+        echo "Promoting test image to production..."
+        if ! make promote; then
+          echo "❌ ERROR: Promotion failed."
+          echo "    - Check tagging logic in the promote Make target"
+          echo "    - Check registry credentials and push permissions"
+          echo "    - Check Docker daemon logs on the agent"
+          exit 1
+        fi
+
+      - |
+        echo "Running the production image..."
+        if ! make prod-run; then
+          echo "❌ ERROR: prod-run failed."
+          echo "    - Check Docker daemon logs on the agent"
+          exit 1
+        fi
+
+        
+
+      - |
+        echo "Tearing down test environment..."
+        if ! make test-teardown; then
+          echo "❌ ERROR: Test teardown failed."
+          echo "    - Check container removal logic"
+          echo "    - Check network removal logic"
+          exit 1
+        fi
+
+      - |
+        echo "Cleaning test artifacts..."
+        if ! make test-clean; then
+          echo "❌ ERROR: Test cleanup failed."
+          echo "    - Check Docker prune behavior"
+          echo "    - Check for locked or in-use images"
+          exit 1
+        fi
+
+      - echo "✅ Promotion and cleanup completed successfully."
     agents:
       queue: "default-self-hosted"

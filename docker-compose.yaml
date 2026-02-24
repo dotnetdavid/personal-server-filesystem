@@ -3,7 +3,7 @@ services:
     build:
       context: .
     image: personal-server-filesystem:latest
-    container_name: mcp-personal-server-filesystem
+    container_name: ${CONTAINER_NAME}
     command: ["/app/node_modules/.bin/mcp-server-filesystem", "/personal"]
     env_file:
       - ./env/env.compose
